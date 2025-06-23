@@ -12,3 +12,44 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Person {
+  id            String   @id @default(uuid())
+  name          String
+  birth_date    DateTime
+  cpf           String
+  address       String
+  neighborhood  String
+  number        Int
+  complement    String
+  cep           String
+  city          String
+  uf            String
+  phone         String
+  email         String   @unique
+  password_hash String
+
+  Professional Professional[]
+  User         User[]
+
+  @@map("person")
+}
+
+model Professional {
+  person    Person @relation(fields: [person_id], references: [id])
+  person_id String @id
+
+  crp       String
+  voluntary Boolean
+
+  @@map("professionals")
+}
+
+model User {
+  person    Person @relation(fields: [person_id], references: [id])
+  person_id String @id
+
+  gender String
+
+  @@map("user")
+}
