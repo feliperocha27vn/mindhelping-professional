@@ -4,7 +4,6 @@ import { InvalidParametersError } from '../../errors/invalid-parameters'
 import type { PersonRepository } from '../../repositories/person-repository'
 
 interface RegisterUseCaseRequest {
-  id?: string
   name: string
   birth_date: Date | string
   cpf: string
