@@ -8,6 +8,7 @@ import {
 } from 'fastify-type-provider-zod'
 import { app } from './app'
 import { env } from './env'
+import { personRoutes } from './http/routes/person-routes'
 
 app.register(fastifyCors, {
   origin: true,
@@ -29,6 +30,8 @@ app.register(fastifySwagger, {
 app.register(fastifySwaggerUi, {
   routePrefix: '/docs',
 })
+
+app.register(personRoutes)
 
 app
   .listen({
