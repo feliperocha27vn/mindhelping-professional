@@ -18,36 +18,14 @@
 		"enabled": true,
 		"rules": {
 			"recommended": true,
-			"style": {
-				"noUnusedTemplateLiteral": "off"
-			},
 			"a11y": {
-				"noSvgWithoutTitle": "off"
-			},
-			"complexity": {
-				"noForEach": "warn"
-			},
-			"suspicious": {
-				"noArrayIndexKey": "info"
+				"useKeyWithClickEvents": "off"
 			}
 		}
 	},
 	"files": {
-		"ignore": ["node_modules"]
-	},
-	"overrides": [
-		{
-			"include": ["./src/http/**"],
-			"linter": {
-				"rules": {
-					"suspicious": {
-						"noExplicitAny": "info"
-					},
-					"complexity": {
-						"useLiteralKeys": "info"
-					}
-				}
-			}
-		}
-	]
+		"includes": [
+			"!node_modules/**"
+		]
+	}
 }
