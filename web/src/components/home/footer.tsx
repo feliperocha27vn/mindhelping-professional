@@ -9,7 +9,7 @@ import { Mail, Phone } from "lucide-react"
 
 export function Footer() {
     return (
-        <Card className="bg-transparent text-white">
+        <Card className="bg-transparent text-white flex-1 w-full">
             <CardHeader>
                 <CardTitle className="text-xl md:text-4xl">MindHeling Profissionais</CardTitle>
             </CardHeader>
