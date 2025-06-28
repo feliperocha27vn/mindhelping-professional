@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 export function WorkWithUs() {
     return (
-        <div className="mt-8 space-y-2.5">
+        <div className="space-y-2.5">
             <h2 className="text-2xl font-medium">
                 Trablhe conosco
             </h2>
@@ -25,9 +26,11 @@ export function WorkWithUs() {
                     saúde mental.
                 </p>
             </div>
-            <Button className="rounded-3xl  bg-[#333333] text-white after:flex-1 hover:bg-[#333333]/90">
-                Junte-se a nós
-            </Button>
+            <Link href="/register">
+                <Button className="rounded-3xl w-full pt-3 pb-11 text-2xl bg-[#333333] text-white after:flex-1 hover:bg-[#333333]/90">
+                    Junte-se a nós
+                </Button>
+            </Link>
         </div>
     )
 }
