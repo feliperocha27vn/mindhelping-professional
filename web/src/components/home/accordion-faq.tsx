@@ -36,7 +36,7 @@ const items = [
 export default function Component() {
   return (
     <div className="space-y-4 mt-5">
-      <h2 className="text-xl font-bold">Perguntas frequentes</h2>
+      <h2 className="text-2xl md:text-4xl font-bold">Perguntas frequentes</h2>
       <Accordion
         type="single"
         collapsible
@@ -49,10 +49,10 @@ export default function Component() {
             key={item.id}
             className="has-focus-visible:border-ring has-focus-visible:ring-ring/50 relative border px-4 py-1 outline-none first:rounded-t-md last:rounded-b-md last:border-b has-focus-visible:z-10 has-focus-visible:ring-[3px]"
           >
-            <AccordionTrigger className="py-2 text-[15px] leading-6 hover:no-underline focus-visible:ring-0">
+            <AccordionTrigger className="md:text-xl py-2 text-[15px] leading-6 hover:no-underline focus-visible:ring-0">
               {item.title}
             </AccordionTrigger>
-            <AccordionContent className="pb-2">
+            <AccordionContent className="pb-2 md:text-lg">
               {item.content}
             </AccordionContent>
           </AccordionItem>

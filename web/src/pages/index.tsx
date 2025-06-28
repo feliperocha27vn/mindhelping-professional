@@ -8,7 +8,7 @@ export default function Home() {
 	return (
 		<div className="max-w-7xl min-h-screen flex-1 flex flex-col items-center bg-[url(/assets/full-shot-young-woman-undergoing-therapy.png)] bg-cover bg-no-repeat font-sans text-white">
 			<Header />
-			<div className="px-8 mb-5 space-y-8">
+			<div className="px-8 mb-5 space-y-8 md:space-y-16">
 				<AboutUs />
 				<WorkWithUs />
 				<AccordionFaq />

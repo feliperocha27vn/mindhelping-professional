@@ -10,7 +10,7 @@ export function AboutUs() {
                 height={0}
                 className="w-96 md:w-[36rem] h-auto"
             />
-            <div className="space-y-1">
+            <div className="space-y-1 md:space-y-4">
                 <h2 className="text-2xl md:text-4xl font-medium">Sobre nós</h2>
                 <p className="font-light md:text-2xl">
                     Nosso aplicativo leva a saúde mental para todos os cantos do Brasil, deve ser acessível a todos. Buscamos profissionais comprometidos com a missão de tornar o cuidado emocional acessível a todos.
