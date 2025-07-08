@@ -1,3 +1,4 @@
+import { Mail, Phone } from "lucide-react"
 import {
     Card,
     CardContent,
@@ -5,7 +6,6 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { Mail, Phone } from "lucide-react"
 
 export function Footer() {
     return (
@@ -25,13 +25,13 @@ export function Footer() {
             <CardFooter className="flex flex-col items-start space-y-2.5">
                 <p className="font-bold text-lg md:text-3xl">Contate - nos</p>
                 <div className="flex items-center space-x-2 md:space-x-4">
-                    <Mail size={20} className="md:hidden"/>
-                    <Mail size={30} className="hidden md:block"/>
+                    <Mail size={20} className="md:hidden" />
+                    <Mail size={30} className="hidden md:block" />
                     <p className="font-light md:text-xl">suporte.mindhelping@gmail.com</p>
                 </div>
                 <div className="flex items-center space-x-2 md:space-x-4">
-                    <Phone size={20} className="md:hidden"/>
-                    <Phone size={30} className="hidden md:block"/>
+                    <Phone size={20} className="md:hidden" />
+                    <Phone size={30} className="hidden md:block" />
                     <p className="font-light md:text-xl">+55 18 99999-0000</p>
                 </div>
             </CardFooter>
