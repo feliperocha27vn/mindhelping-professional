@@ -1,4 +1,4 @@
-import { ResourceNotFoundError } from '@/errors/resource-not-found-error'
+import { EmailAlreadyExistsError } from '@/errors/email-already-exists-error'
 import type { Person } from '@prisma/client'
 import { hash } from 'bcryptjs'
 import { InvalidParametersError } from '../../errors/invalid-parameters'
@@ -55,7 +55,7 @@ export class RegisterUseCase {
       await this.registerPersonRepository.findByEmail(email)
 
     if (emailAlreadyExists) {
-      throw new ResourceNotFoundError()
+      throw new EmailAlreadyExistsError()
     }
 
     const person = await this.registerPersonRepository.create({

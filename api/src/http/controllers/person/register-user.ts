@@ -1,3 +1,4 @@
+import { EmailAlreadyExistsError } from '@/errors/email-already-exists-error'
 import { makePersonUseCase } from '@/factories/make-register-person-use-case'
 import { makeRegisterUserUseCase } from '@/factories/make-register-user-use-case'
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
@@ -28,6 +29,7 @@ export const registerUser: FastifyPluginAsyncZod = async app => {
         }),
         response: {
           201: z.object({ void: z.void() }),
+          400: z.object({ message: z.string() }),
           500: z.object({ message: z.string() }),
         },
       },
@@ -50,27 +52,27 @@ export const registerUser: FastifyPluginAsyncZod = async app => {
         gender,
       } = request.body
 
-      const personUseCase = makePersonUseCase()
-
-      const { person } = await personUseCase.execute({
-        name,
-        birth_date,
-        cpf,
-        address,
-        neighborhood,
-        number,
-        complement,
-        cepUser,
-        city,
-        uf,
-        phone,
-        email,
-        password,
-      })
-
-      const userUseCase = makeRegisterUserUseCase()
-
       try {
+        const personUseCase = makePersonUseCase()
+
+        const { person } = await personUseCase.execute({
+          name,
+          birth_date,
+          cpf,
+          address,
+          neighborhood,
+          number,
+          complement,
+          cepUser,
+          city,
+          uf,
+          phone,
+          email,
+          password,
+        })
+
+        const userUseCase = makeRegisterUserUseCase()
+
         await userUseCase.execute({
           person_id: person.id,
           gender,
@@ -78,11 +80,17 @@ export const registerUser: FastifyPluginAsyncZod = async app => {
 
         reply.status(201).send()
       } catch (error) {
-        if (error instanceof Error) {
-          reply.status(500).send({ message: error.message })
-        } else {
-          reply.status(500).send({ message: 'An unexpected error occurred' })
+        if (error instanceof EmailAlreadyExistsError) {
+          return reply.status(400).send({ message: error.message })
         }
+
+        if (error instanceof Error) {
+          return reply.status(500).send({ message: error.message })
+        }
+
+        return reply
+          .status(500)
+          .send({ message: 'An unexpected error occurred' })
       }
     }
   )

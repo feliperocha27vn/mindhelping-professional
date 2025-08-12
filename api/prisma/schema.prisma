@@ -44,6 +44,19 @@ model User {
   person_id String @id
 
   gender String
+  Goal   Goal[]
 
   @@map("user")
+}
+
+model Goal {
+  id           String   @id @default(uuid())
+  user         User     @relation(fields: [userPersonId], references: [person_id])
+  userPersonId String   @map("user_person_id")
+  description  String
+  numberDays   Int
+  counter      Int
+  createdAt    DateTime @default(now())
+
+  @@map("goal")
 }

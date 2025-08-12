@@ -1,4 +1,4 @@
-import { ResourceNotFoundError } from '@/errors/resource-not-found-error'
+import { EmailAlreadyExistsError } from '@/errors/email-already-exists-error'
 import { compare } from 'bcryptjs'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { InvalidParametersError } from '../../errors/invalid-parameters'
@@ -109,6 +109,6 @@ describe('Register person use case', () => {
         email: 'maria.santos@email.com',
         password: 'senha123',
       })
-    ).rejects.toBeInstanceOf(ResourceNotFoundError)
+    ).rejects.toBeInstanceOf(EmailAlreadyExistsError)
   })
 })
