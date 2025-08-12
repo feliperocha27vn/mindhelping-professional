@@ -1,3 +1,4 @@
+import { ResourceNotFoundError } from '@/errors/resource-not-found-error'
 import { InMemoryGoalRepository } from '@/in-memory-repository/in-memory-goal-repository'
 import { InMemoryPersonRepository } from '@/in-memory-repository/in-memory-person-repository'
 import { hash } from 'bcryptjs'
@@ -36,9 +37,18 @@ describe('Create goal use case', () => {
       userPersonId: person.id,
       description: 'New Goal',
       numberDays: 30,
-      counter: 1,
     })
 
     expect(goal.id).toEqual(expect.any(String))
+  })
+
+  it('should not be able to create a goal for a non-existing person', async () => {
+    await expect(() =>
+      sut.execute({
+        userPersonId: 'non-existing-person-id',
+        description: 'New Goal',
+        numberDays: 30,
+      })
+    ).rejects.toBeInstanceOf(ResourceNotFoundError)
   })
 })

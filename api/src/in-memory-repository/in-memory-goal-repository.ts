@@ -10,8 +10,9 @@ export class InMemoryGoalRepository implements GoalRepository {
       userPersonId: data.userPersonId,
       description: data.description,
       numberDays: data.numberDays,
-      counter: data.counter ?? 0,
+      isExecuted: data.isExecuted ?? false,
       createdAt: new Date(),
+      updatedAt: new Date(),
     }
 
     this.goals.push(goal)

@@ -7,7 +7,6 @@ interface CreateGoalUseCaseRequest {
   userPersonId: string
   description: string
   numberDays: number
-  counter: number
 }
 
 interface CreateGoalUseCaseResponse {
@@ -24,7 +23,6 @@ export class CreateGoalUseCase {
     userPersonId,
     description,
     numberDays,
-    counter = 0,
   }: CreateGoalUseCaseRequest): Promise<CreateGoalUseCaseResponse> {
     const person = await this.personRepository.findById(userPersonId)
 
@@ -36,7 +34,6 @@ export class CreateGoalUseCase {
       userPersonId,
       description,
       numberDays,
-      counter,
     })
 
     return {

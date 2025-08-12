@@ -57,7 +57,7 @@ describe('Register person use case', () => {
   })
 
   it('should be able not register a CEP invalid', async () => {
-    expect(() =>
+    await expect(() =>
       sut.execute({
         name: 'Dr. Maria Silva Santos',
         birth_date: '1985-03-15',
@@ -93,7 +93,7 @@ describe('Register person use case', () => {
       password: 'senha123',
     })
 
-    expect(() =>
+    await expect(() =>
       sut.execute({
         name: 'Dr. Maria Silva Santos',
         birth_date: '1985-03-15',

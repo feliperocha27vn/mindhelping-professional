@@ -55,8 +55,10 @@ model Goal {
   userPersonId String   @map("user_person_id")
   description  String
   numberDays   Int
-  counter      Int
+  isExecuted   Boolean  @default(false)
+  isExpire     Boolean  @default(false)
   createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   @@map("goal")
 }
