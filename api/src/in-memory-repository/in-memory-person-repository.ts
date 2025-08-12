@@ -1,5 +1,5 @@
-import { randomUUID } from 'node:crypto'
 import type { Person, Prisma } from '@prisma/client'
+import { randomUUID } from 'node:crypto'
 import type { PersonRepository } from '../repositories/person-repository'
 
 export class InMemoryPersonRepository implements PersonRepository {
@@ -36,5 +36,15 @@ export class InMemoryPersonRepository implements PersonRepository {
     }
 
     return person
+  }
+
+  async findByEmail(email: string) {
+      const person = this.items.find(item => item.email === email)
+
+      if (!person) {
+          return null
+      }
+
+      return person
   }
 }

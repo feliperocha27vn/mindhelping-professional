@@ -49,7 +49,7 @@ describe('Register professional use case', () => {
   })
 
   it('should not be able de register', async () => {
-    await expect(() =>
+    expect(() =>
       sut.execute({
         person_id: 'no-person-exists',
         crp: '06/123456',

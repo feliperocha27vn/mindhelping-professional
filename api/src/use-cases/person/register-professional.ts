@@ -31,12 +31,10 @@ export class RegisterProfessionalUseCase {
     }
 
     const professional = await this.registerProfessionalRepository.create({
-      person_id,
+      person_id: person.id,
       crp,
       voluntary,
     })
-
-    // TODO: verification crp
 
     return {
       professional,

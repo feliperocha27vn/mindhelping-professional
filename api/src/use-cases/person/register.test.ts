@@ -1,3 +1,4 @@
+import { ResourceNotFoundError } from '@/errors/resource-not-found-error'
 import { compare } from 'bcryptjs'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { InvalidParametersError } from '../../errors/invalid-parameters'
@@ -56,7 +57,7 @@ describe('Register person use case', () => {
   })
 
   it('should be able not register a CEP invalid', async () => {
-    await expect(() =>
+    expect(() =>
       sut.execute({
         name: 'Dr. Maria Silva Santos',
         birth_date: '1985-03-15',
@@ -73,5 +74,41 @@ describe('Register person use case', () => {
         password: 'senha123',
       })
     ).rejects.toBeInstanceOf(InvalidParametersError)
+  })
+
+  it('should not be able to register a person with email already exists', async () => {
+    sut.execute({
+      name: 'Dr. Maria Silva Santos',
+      birth_date: '1985-03-15',
+      cpf: '123.456.789-00',
+      address: 'Rua das Flores',
+      neighborhood: 'Centro',
+      number: 1232,
+      complement: 'Sala 201',
+      cepUser: '01234-567',
+      city: 'São Paulo',
+      uf: 'SP',
+      phone: '(11) 99999-8888',
+      email: 'maria.santos@email.com',
+      password: 'senha123',
+    })
+
+    expect(() =>
+      sut.execute({
+        name: 'Dr. Maria Silva Santos',
+        birth_date: '1985-03-15',
+        cpf: '123.456.789-00',
+        address: 'Rua das Flores',
+        neighborhood: 'Centro',
+        number: 1232,
+        complement: 'Sala 201',
+        cepUser: '01234-567',
+        city: 'São Paulo',
+        uf: 'SP',
+        phone: '(11) 99999-8888',
+        email: 'maria.santos@email.com',
+        password: 'senha123',
+      })
+    ).rejects.toBeInstanceOf(ResourceNotFoundError)
   })
 })

@@ -1,3 +1,4 @@
+import { ResourceNotFoundError } from '@/errors/resource-not-found-error'
 import type { Person } from '@prisma/client'
 import { hash } from 'bcryptjs'
 import { InvalidParametersError } from '../../errors/invalid-parameters'
@@ -48,6 +49,13 @@ export class RegisterUseCase {
 
     if (!cep) {
       throw new InvalidParametersError()
+    }
+
+    const emailAlreadyExists =
+      await this.registerPersonRepository.findByEmail(email)
+
+    if (emailAlreadyExists) {
+      throw new ResourceNotFoundError()
     }
 
     const person = await this.registerPersonRepository.create({
