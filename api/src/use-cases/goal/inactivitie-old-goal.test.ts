@@ -97,4 +97,12 @@ describe('Inactivate old goal', () => {
       })
     )
   })
+
+  it('should not be able to no inactivate goal non existent', async () => {
+    await expect(() =>
+      sut.execute({
+        goalId: 'non-existent-goal-id',
+      })
+    ).rejects.toThrow('Resource not found')
+  })
 })

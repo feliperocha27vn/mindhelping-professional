@@ -42,4 +42,46 @@ export class InMemoryGoalRepository implements GoalRepository {
 
     return goal
   }
+
+  async updateExecuteGoal(goalId: string) {
+    const goal = await this.findById(goalId)
+
+    if (!goal) {
+      return null
+    }
+
+    goal.isExecuted = true
+
+    return goal
+  }
+
+  async update(
+    goalId: string,
+    personId: string,
+    goal: Prisma.GoalUncheckedUpdateInput
+  ) {
+    const person = this.goals.find(goal => goal.userPersonId === personId)
+
+    if (!person) {
+      return null
+    }
+
+    const existingGoal = this.goals.find(goal => goal.id === goalId)
+
+    if (!existingGoal) {
+      return null
+    }
+
+    const updatedGoal = {
+      ...existingGoal,
+      description: (goal.description as string) ?? existingGoal.description,
+      numberDays: (goal.numberDays as number) ?? existingGoal.numberDays,
+      updatedAt: new Date(),
+    }
+
+    const goalIndex = this.goals.findIndex(g => g.id === goalId)
+    this.goals[goalIndex] = updatedGoal
+
+    return updatedGoal
+  }
 }

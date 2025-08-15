@@ -35,6 +35,20 @@ CREATE TABLE "user" (
     CONSTRAINT "user_pkey" PRIMARY KEY ("person_id")
 );
 
+-- CreateTable
+CREATE TABLE "goal" (
+    "id" TEXT NOT NULL,
+    "user_person_id" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "numberDays" INTEGER NOT NULL,
+    "isExecuted" BOOLEAN NOT NULL DEFAULT false,
+    "isExpire" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "goal_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "person_email_key" ON "person"("email");
 
@@ -43,3 +57,6 @@ ALTER TABLE "professionals" ADD CONSTRAINT "professionals_person_id_fkey" FOREIG
 
 -- AddForeignKey
 ALTER TABLE "user" ADD CONSTRAINT "user_person_id_fkey" FOREIGN KEY ("person_id") REFERENCES "person"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "goal" ADD CONSTRAINT "goal_user_person_id_fkey" FOREIGN KEY ("user_person_id") REFERENCES "user"("person_id") ON DELETE RESTRICT ON UPDATE CASCADE;
